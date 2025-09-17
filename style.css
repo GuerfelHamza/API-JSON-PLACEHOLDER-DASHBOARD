@@ -1,31 +1,106 @@
-/* Supprime les marges par défaut du body */
-body,
-html {
-  margin: 0;
-  height: 100%;
-}
+/* =============================
+   CONTENEURS
+============================= */
 
-/* Conteneur principal en flex */
-#container {
-  display: flex; /* flex pour diviser horizontalement */
-  height: 100vh; /* prend toute la hauteur de la fenêtre */
-}
-
-/* Moitié gauche */
+/* Conteneur gauche (liste des utilisateurs) */
 #left {
-  flex: 1; /* prend 50% */
-  background-color: #f0f0f0;
-  padding: 20px;
-  box-sizing: border-box;
-  overflow-y: auto; /* scroll si beaucoup de boutons */
+  width: 20%;                 /* largeur réduite */
+  float: left;
+  padding: 6px;
+  background-color: #f1f3f5;
+  border-right: 1px solid #ccc;
+  height: 100vh;
+  overflow-y: auto;
+  font-size: 12px;            /* texte réduit */
+  font-family: Arial, sans-serif;
 }
 
-/* Moitié droite */
+/* Conteneur droit (posts de l’utilisateur) */
 #right {
-  flex: 1; /* prend 50% */
-  background-color: #ffffff;
-  padding: 20px;
-  box-sizing: border-box;
+  width: 80%;                 /* prend plus d’espace */
+  float: left;
+  padding: 15px;
+  background-color: #fafafa;
+  height: 100vh;
   overflow-y: auto;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
 }
- btn.className = "btn btn-success m-2";
+
+/* =============================
+   BOUTONS UTILISATEURS (GAUCHE)
+============================= */
+#left button.gradient-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 95%;
+  margin: 4px auto;
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #1f2937;                  /* texte gris foncé */
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  border: none;
+  background: linear-gradient(to bottom right, #9333ea, #3b82f6); /* violet → bleu */
+  transition: color 0.3s ease;
+}
+
+/* Span interne pour l’effet “fond blanc au repos” */
+#left button.gradient-btn span {
+  position: relative;
+  padding: 0.5rem 1rem;
+  background: white;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+
+/* Hover : texte blanc + fond transparent */
+#left button.gradient-btn:hover {
+  color: white;
+}
+
+#left button.gradient-btn:hover span {
+  background: transparent;
+}
+
+/* Bouton actif sélectionné */
+#left button.gradient-btn.active span {
+  background: transparent;
+  color: white;
+}
+
+/* =============================
+   BOUTONS POSTS (DROITE)
+============================= */
+#right button {
+  display: block;
+  width: 96%;
+  margin: 8px auto;
+  padding: 12px;
+  text-align: left;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: box-shadow 0.2s ease;
+}
+
+#right button:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Titres et contenus dans les posts */
+#right button h4 {
+  margin: 3px 0;
+  font-size: 13px;
+  color: #444;
+}

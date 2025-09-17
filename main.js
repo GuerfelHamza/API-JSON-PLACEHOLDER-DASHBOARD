@@ -72,6 +72,7 @@ function getUsers() {
       btn.addEventListener("click", function () {
         right.textContent = "";
         getPosts(element.id);
+        btn.className = "btn btn-success m-2";
       });
 
       left.append(btn);
