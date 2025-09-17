@@ -2,105 +2,108 @@
    CONTENEURS
 ============================= */
 
-/* Conteneur gauche (liste des utilisateurs) */
+/* Sidebar gauche */
 #left {
-  width: 20%;                 /* largeur réduite */
+  width: 22%;                     
   float: left;
-  padding: 6px;
-  background-color: #f1f3f5;
-  border-right: 1px solid #ccc;
+  padding: 10px;
+  background-color: #f0f4f8;      /* léger bleu/gris pour le fond */
+  border-right: 1px solid #e0e0e0;
   height: 100vh;
   overflow-y: auto;
-  font-size: 12px;            /* texte réduit */
-  font-family: Arial, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12px;                 /* légèrement plus petit */
 }
 
-/* Conteneur droit (posts de l’utilisateur) */
+/* Zone droite (posts) */
 #right {
-  width: 80%;                 /* prend plus d’espace */
+  width: 78%;
   float: left;
-  padding: 15px;
-  background-color: #fafafa;
+  padding: 20px;
+  background-color: #ffffff;
   height: 100vh;
   overflow-y: auto;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 14px;
-  font-family: Arial, sans-serif;
 }
 
 /* =============================
-   BOUTONS UTILISATEURS (GAUCHE)
+   BOUTONS UTILISATEURS GAUCHE
 ============================= */
-#left button.gradient-btn {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 95%;
-  margin: 4px auto;
-  padding: 7px 10px;
-  font-size: 12px;
-  font-weight: 500;
-  color: #1f2937;                  /* texte gris foncé */
-  border-radius: 8px;
-  overflow: hidden;
-  cursor: pointer;
-  border: none;
-  background: linear-gradient(to bottom right, #9333ea, #3b82f6); /* violet → bleu */
-  transition: color 0.3s ease;
-}
-
-/* Span interne pour l’effet “fond blanc au repos” */
-#left button.gradient-btn span {
-  position: relative;
-  padding: 0.5rem 1rem;
-  background: white;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-  z-index: 1;
+#left button {
   display: block;
   width: 100%;
+  margin: 6px 0;
+  padding: 9px 10px;               /* légèrement plus compact */
   text-align: left;
+  font-size: 12px;                 /* texte réduit */
+  font-weight: 500;
+  color: #1f2937;
+  background-color: #e6f0ff;       /* léger bleu pastel */
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  transition: all 0.2s ease;
 }
 
-/* Hover : texte blanc + fond transparent */
-#left button.gradient-btn:hover {
+/* Hover */
+#left button:hover {
+  background-color: #d0e4ff;       /* bleu un peu plus foncé */
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Active */
+#left button.active {
+  background-color: #2563eb;       /* bleu pro */
   color: white;
-}
-
-#left button.gradient-btn:hover span {
-  background: transparent;
-}
-
-/* Bouton actif sélectionné */
-#left button.gradient-btn.active span {
-  background: transparent;
-  color: white;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(37,99,235,0.3);
 }
 
 /* =============================
-   BOUTONS POSTS (DROITE)
+   BOUTONS POSTS DROITE
 ============================= */
 #right button {
   display: block;
   width: 96%;
-  margin: 8px auto;
-  padding: 12px;
+  margin: 10px auto;
+  padding: 14px;
   text-align: left;
-  background-color: #ffffff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  background-color: #f1f5f9;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 13px;
-  transition: box-shadow 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  transition: all 0.2s ease;
 }
 
+/* Hover */
 #right button:hover {
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  background-color: #e2e8f0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/* Titres et contenus dans les posts */
+/* Titres et contenu dans les posts */
 #right button h4 {
-  margin: 3px 0;
+  margin: 4px 0;
   font-size: 13px;
-  color: #444;
+  color: #1f2937;
+}
+
+/* =============================
+   RESPONSIVE LÉGER
+============================= */
+@media (max-width: 768px) {
+  #left, #right {
+    width: 100%;
+    float: none;
+    height: auto;
+  }
+
+  #left button, #right button {
+    width: 98%;
+  }
 }
