@@ -28,3 +28,4 @@ html {
   box-sizing: border-box;
   overflow-y: auto;
 }
+ btn.className = "btn btn-success m-2";
