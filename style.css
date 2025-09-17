@@ -1,0 +1,30 @@
+/* Supprime les marges par défaut du body */
+body,
+html {
+  margin: 0;
+  height: 100%;
+}
+
+/* Conteneur principal en flex */
+#container {
+  display: flex; /* flex pour diviser horizontalement */
+  height: 100vh; /* prend toute la hauteur de la fenêtre */
+}
+
+/* Moitié gauche */
+#left {
+  flex: 1; /* prend 50% */
+  background-color: #f0f0f0;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto; /* scroll si beaucoup de boutons */
+}
+
+/* Moitié droite */
+#right {
+  flex: 1; /* prend 50% */
+  background-color: #ffffff;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
