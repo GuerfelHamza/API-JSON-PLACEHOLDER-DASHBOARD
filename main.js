@@ -1,83 +1,91 @@
-function getPosts(c) {
-  let request = new XMLHttpRequest();
+// main.js
+async function loadData() {
+  try {
+    const [postsRes, usersRes] = await Promise.all([
+      fetch("https://jsonplaceholder.typicode.com/posts"),
+      fetch("https://jsonplaceholder.typicode.com/users"),
+    ]);
 
-  //send request
+    if (!postsRes.ok || !usersRes.ok) {
+      throw new Error("Erreur de récupération des données");
+    }
 
-  request.open("GET", "https://jsonplaceholder.typicode.com/posts");
-  request.responseType = "json";
-  request.send();
+    const posts = await postsRes.json();
+    const users = await usersRes.json();
 
-  request.onload = function () {
-    let r = request.response;
+    const left = document.getElementById("left");
+    const right = document.getElementById("right");
 
-    r.forEach((element) => {
-      if (c === element.userId) {
-        console.log("The request status is ", request.status);
-        console.log("liste of users ", request.response);
-        console.log(element.title);
-        console.log(element.body);
+    // Helper pour échapper le HTML (sécurité si tu utilises innerHTML)
+    function escapeHtml(text) {
+      const map = {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+      };
+      return String(text).replace(/[&<>"']/g, (m) => map[m]);
+    }
 
-        //creation of html elemnts
-        let div = document.getElementById("left");
-        let title = document.createElement("h4");
-        let bod = document.createElement("h4");
-        let btn = document.createElement("button");
-        let right = document.getElementById("right");
-        title.append(element.title);
-        bod.append(element.body);
-
-        btn.append(title);
-        btn.append(bod);
-        right.append(btn);
-
-        document.body.append(document.createElement("br"));
+    // Rendu des posts dans la colonne droite
+    function renderPosts(postsArray) {
+      right.innerHTML = "";
+      if (!postsArray.length) {
+        right.textContent = "Cet utilisateur n'a aucun post.";
+        return;
       }
-    });
-  };
-}
 
-/*************************** */
-function getUsers() {
-  let request = new XMLHttpRequest();
+      postsArray.forEach((p) => {
+        const card = document.createElement("div");
+        card.className = "post-card";
 
-  //send request
+        const title = document.createElement("h4");
+        title.textContent = p.title;
 
-  request.open("GET", "https://jsonplaceholder.typicode.com/users");
-  request.responseType = "json";
-  request.send();
+        const body = document.createElement("p");
+        body.textContent = p.body;
 
-  request.onload = function () {
-    let r = request.response;
+        card.append(title, body);
+        right.appendChild(card);
+      });
+    }
 
-    r.forEach((element) => {
-      console.log("The request status is ", request.status);
-      console.log("liste of users ", request.response);
-      console.log(r.name);
-      console.log(r.email);
-      console.log("ttttttttttttttttrr " + element.email);
-      //creation of html elemnts
-      let title = document.createElement("h4");
-      let bod = document.createElement("h4");
-      let btn = document.createElement("button");
-      let right = document.getElementById("right");
-      let left = document.getElementById("left");
-      title.append(element.name);
-      bod.append(element.email);
+    // Création liste utilisateurs à gauche
+    users.forEach((user) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "user-btn";
+      // on met du HTML minimal mais échappé
+      btn.innerHTML = `<strong>${escapeHtml(
+        user.name
+      )}</strong><small>${escapeHtml(user.email)}</small>`;
 
-      btn.append(title);
-      btn.append(bod);
+      btn.addEventListener("click", () => {
+        // toggle active
+        document
+          .querySelectorAll("#left .user-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
 
-      document.body.append(document.createElement("br"));
-
-      btn.addEventListener("click", function () {
-        right.textContent = "";
-        getPosts(element.id);
-        btn.className = "btn btn-success m-2";
+        // filtre posts du user cliqué
+        const userPosts = posts.filter((p) => p.userId === user.id);
+        renderPosts(userPosts);
       });
 
-      left.append(btn);
+      left.appendChild(btn);
     });
-  };
+
+    // Sélectionne et affiche le premier user automatiquement (pratique)
+    const firstBtn = left.querySelector(".user-btn");
+    if (firstBtn) firstBtn.click();
+  } catch (err) {
+    console.error(err);
+    const right = document.getElementById("right");
+    if (right)
+      right.textContent =
+        "Erreur lors du chargement des données. Regarde la console.";
+  }
 }
 
-getUsers();
+document.addEventListener("DOMContentLoaded", loadData);

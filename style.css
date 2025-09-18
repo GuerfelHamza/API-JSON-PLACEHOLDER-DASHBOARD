@@ -1,109 +1,93 @@
-/* =============================
-   CONTENEURS
-============================= */
-
-/* Sidebar gauche */
+/* Layout */
 #left {
-  width: 22%;                     
+  width: 22%;
   float: left;
-  padding: 10px;
-  background-color: #f0f4f8;      /* léger bleu/gris pour le fond */
+  padding: 12px;
+  background: #f0f4f8;
   border-right: 1px solid #e0e0e0;
   height: 100vh;
   overflow-y: auto;
+  box-sizing: border-box;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 12px;                 /* légèrement plus petit */
 }
 
-/* Zone droite (posts) */
 #right {
   width: 78%;
   float: left;
   padding: 20px;
-  background-color: #ffffff;
   height: 100vh;
   overflow-y: auto;
+  box-sizing: border-box;
+  background: #ffffff;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 14px;
 }
 
-/* =============================
-   BOUTONS UTILISATEURS GAUCHE
-============================= */
-#left button {
+/* Boutons utilisateurs */
+.user-btn {
   display: block;
   width: 100%;
+  text-align: left;
+  padding: 10px;
   margin: 6px 0;
-  padding: 9px 10px;               /* légèrement plus compact */
-  text-align: left;
-  font-size: 12px;                 /* texte réduit */
-  font-weight: 500;
-  color: #1f2937;
-  background-color: #e6f0ff;       /* léger bleu pastel */
-  border: 1px solid #d1d5db;
   border-radius: 6px;
-  cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  transition: all 0.2s ease;
-}
-
-/* Hover */
-#left button:hover {
-  background-color: #d0e4ff;       /* bleu un peu plus foncé */
-  transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-/* Active */
-#left button.active {
-  background-color: #2563eb;       /* bleu pro */
-  color: white;
-  font-weight: 600;
-  box-shadow: 0 4px 10px rgba(37,99,235,0.3);
-}
-
-/* =============================
-   BOUTONS POSTS DROITE
-============================= */
-#right button {
-  display: block;
-  width: 96%;
-  margin: 10px auto;
-  padding: 14px;
-  text-align: left;
-  background-color: #f1f5f9;
   border: 1px solid #d1d5db;
-  border-radius: 8px;
+  background: #e6f0ff;
   cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: all 0.15s ease;
   font-size: 13px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  transition: all 0.2s ease;
 }
 
-/* Hover */
-#right button:hover {
-  background-color: #e2e8f0;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+.user-btn small {
+  color: #374151;
+  display: block;
+  margin-top: 4px;
+  font-weight: 400;
 }
 
-/* Titres et contenu dans les posts */
-#right button h4 {
-  margin: 4px 0;
-  font-size: 13px;
-  color: #1f2937;
+.user-btn:hover {
+  transform: translateY(-1px);
+  background: #d0e4ff;
+}
+.user-btn.active {
+  background: #2563eb;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 6px 12px rgba(37, 99, 235, 0.18);
 }
 
-/* =============================
-   RESPONSIVE LÉGER
-============================= */
+/* Posts (droite) */
+.post-card {
+  border: 1px solid #e6eef8;
+  padding: 14px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  background: #f8fbff;
+}
+
+.post-card h4 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  color: #0f172a;
+}
+.post-card p {
+  margin: 0;
+  font-size: 14px;
+  color: #334155;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-  #left, #right {
+  #left,
+  #right {
     width: 100%;
     float: none;
     height: auto;
   }
-
-  #left button, #right button {
-    width: 98%;
+  #left {
+    order: 2;
+  }
+  #right {
+    order: 1;
   }
 }
